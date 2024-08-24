@@ -1,0 +1,14 @@
+const jwt = require("jsonwebtoken");
+function AuthMiddleware(req, res, next) {
+  const token = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, "teja2233", function (err, decoded) {
+    if (err) {
+      res.status(401).send({ message: "Invalid token" });
+    } else {
+      req.body = { ...req.body, ...decoded };
+      next();
+    }
+  });
+}
+
+module.exports = AuthMiddleware;
