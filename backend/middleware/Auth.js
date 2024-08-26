@@ -5,7 +5,12 @@ function AuthMiddleware(req, res, next) {
     if (err) {
       res.status(401).send({ message: "Invalid token" });
     } else {
-      req.body = { ...req.body, ...decoded };
+      req.body = {
+        ...req.body,
+        ...decoded,
+        date: new Date(),
+        created: new Date().getHours() + " : " + new Date().getMinutes(),
+      };
       next();
     }
   });
