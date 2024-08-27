@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   Button,
@@ -8,8 +8,11 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
+import { AuthContext } from "../context/AuthContext";
 
 export default function LandingPage() {
+  const { isAuth } = useContext(AuthContext);
+  console.log(isAuth);
   return (
     <Box>
       {/* Hero Section */}

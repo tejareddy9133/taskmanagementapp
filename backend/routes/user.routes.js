@@ -8,7 +8,6 @@ UserRouter.post("/register", async (req, res) => {
   const user = req.body;
   try {
     const password = await bcrypt.hash(user.password, 5); //hashed password
-
     const result = await UserModel({ ...user, password });
     await result.save();
     res.status(200).json({ msg: "User registered  successfully" });

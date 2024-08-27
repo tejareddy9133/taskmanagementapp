@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import MenuAppBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import LandingPage from "./pages/Homepage";
+import { AllRotes } from "./components/AllRotes";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       {/* <Button variant="contained">Hello world</Button>;
        */}
       <MenuAppBar />
-      <LandingPage />
+      <AllRotes />
       <Footer />
     </div>
   );

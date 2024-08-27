@@ -8,6 +8,7 @@ const TaskRouter = express.Router();
 
 TaskRouter.post("/create", AuthMiddleware, async (req, res) => {
   const task = req.body;
+  console.log(task);
   try {
     if (task) {
       const newTask = await TaskModel(task);
@@ -59,6 +60,7 @@ TaskRouter.delete("/delete/:id", AuthMiddleware, async (req, res) => {
 });
 TaskRouter.get("/:id", AuthMiddleware, async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   try {
     if (id) {
       const task = await TaskModel.find({ userID: id });
