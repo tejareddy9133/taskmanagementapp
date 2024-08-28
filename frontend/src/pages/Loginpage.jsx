@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { Login, isAuth, Logout } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
-    console.log(formData);
-  };
+    const credintials = { email, password };
+    console.log(credintials);
+    axios
+      .post("http://localhost:4000/users/login", credintials)
 
+      .then((data) => {
+        console.log(data.data);
+        if (data.data.token) {
+          Login();
+        } else {
+          Logout();
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        Logout();
+      });
+    console.log("ufcufufvux2fvqtucftdtf2fxy2t");
+    console.log(isAuth);
+  };
+  console.log(isAuth);
   return (
     <Container maxWidth="sm">
       <Box sx={{ mt: 5 }}>
@@ -28,8 +42,8 @@ const Login = () => {
             label="Email"
             name="email"
             type="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -37,8 +51,8 @@ const Login = () => {
             label="Password"
             name="password"
             type="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             fullWidth
             margin="normal"
           />

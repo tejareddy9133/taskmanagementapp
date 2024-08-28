@@ -6,8 +6,8 @@ function AuthMiddleware(req, res, next) {
       res.status(401).send({ message: "Invalid token" });
     } else {
       req.body = {
-        ...req.body,
-        ...decoded,
+        ...req.body, //3 //tasktitle,taskdesc,status
+        ...decoded, //2 //userid,username
         date: new Date(),
         created: new Date().getHours() + " : " + new Date().getMinutes(),
       };
